@@ -1,0 +1,97 @@
+[
+    {
+      "name": "codebase_search",
+      "description": "Find snippets of code from the codebase most relevant to the search query. This is a semantic search tool.",
+      "arguments": [
+        { "name": "query", "type": "string", "required": true, "description": "The search query to find relevant code." },
+        { "name": "target_directories", "type": "string[]", "required": false, "description": "Directories to search over." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this search is being performed." }
+      ]
+    },
+    {
+      "name": "read_file",
+      "description": "Read the contents of a file, specifying a line range or the entire file.",
+      "arguments": [
+        { "name": "target_file", "type": "string", "required": true, "description": "Path of the file to read." },
+        { "name": "should_read_entire_file", "type": "boolean", "required": false, "description": "Whether to read the entire file. Defaults to false." },
+        { "name": "start_line_one_indexed", "type": "integer", "required": false, "description": "The one-indexed line number to start reading from (inclusive)." },
+        { "name": "end_line_one_indexed_inclusive", "type": "integer", "required": false, "description": "The one-indexed line number to end reading at (inclusive)." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this file is being read." }
+      ]
+    },
+    {
+      "name": "run_terminal_cmd",
+      "description": "Propose a command to run on behalf of the user in the terminal.",
+      "arguments": [
+        { "name": "command", "type": "string", "required": true, "description": "The terminal command to execute." },
+        { "name": "is_background", "type": "boolean", "required": true, "description": "Whether the command should be run in the background." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this command is being run." }
+      ]
+    },
+    {
+      "name": "list_dir",
+      "description": "List the contents of a directory, relative to the workspace root.",
+      "arguments": [
+        { "name": "relative_workspace_path", "type": "string", "required": true, "description": "Path to list contents of, relative to the workspace root." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this directory is being listed." }
+      ]
+    },
+    {
+      "name": "grep_search",
+      "description": "Run fast, exact regex searches over text files using the ripgrep engine.",
+      "arguments": [
+        { "name": "query", "type": "string", "required": true, "description": "The regex pattern to search for." },
+        { "name": "case_sensitive", "type": "boolean", "required": false, "description": "Whether the search should be case sensitive." },
+        { "name": "include_pattern", "type": "string", "required": false, "description": "Glob pattern for files to include." },
+        { "name": "exclude_pattern", "type": "string", "required": false, "description": "Glob pattern for files to exclude." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this search is being performed." }
+      ]
+    },
+    {
+      "name": "edit_file",
+      "description": "Propose an edit to an existing file or create a new file.",
+      "arguments": [
+        { "name": "target_file", "type": "string", "required": true, "description": "The target file to modify." },
+        { "name": "instructions", "type": "string", "required": true, "description": "A single sentence instruction describing the edit." },
+        { "name": "code_edit", "type": "string", "required": true, "description": "The precise lines of code to edit, using // ... existing code ... for unchanged code." }
+      ]
+    },
+    {
+      "name": "file_search",
+      "description": "Fast file search based on fuzzy matching against file path.",
+      "arguments": [
+        { "name": "query", "type": "string", "required": true, "description": "Fuzzy filename to search for." },
+        { "name": "explanation", "type": "string", "required": true, "description": "One sentence explanation for why this search is being performed." }
+      ]
+    },
+    {
+      "name": "delete_file",
+      "description": "Deletes a file at the specified path.",
+      "arguments": [
+        { "name": "target_file", "type": "string", "required": true, "description": "The path of the file to delete, relative to the workspace root." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this file is being deleted." }
+      ]
+    },
+    {
+      "name": "reapply",
+      "description": "Calls a smarter model to apply the last edit to the specified file.",
+      "arguments": [
+        { "name": "target_file", "type": "string", "required": true, "description": "The relative path to the file to reapply the last edit to." }
+      ]
+    },
+    {
+      "name": "web_search",
+      "description": "Search the web for real-time information about any topic.",
+      "arguments": [
+        { "name": "search_term", "type": "string", "required": true, "description": "The search term to look up on the web." },
+        { "name": "explanation", "type": "string", "required": false, "description": "One sentence explanation for why this search is being performed." }
+      ]
+    },
+    {
+      "name": "multi_tool_use.parallel",
+      "description": "Run multiple tools simultaneously, but only if they can operate in parallel.",
+      "arguments": [
+        { "name": "tool_uses", "type": "array", "required": true, "description": "List of tool calls to execute in parallel. Each entry specifies: recipient_name (string), parameters (object)." }
+      ]
+    }
+  ]
